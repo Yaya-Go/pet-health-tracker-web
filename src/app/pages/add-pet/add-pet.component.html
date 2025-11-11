@@ -1,0 +1,77 @@
+<div class="add-pet-shell">
+  <mat-card>
+    <h2>Add New Pet</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+      <!-- Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Pet Name</mat-label>
+        <input matInput formControlName="name" placeholder="e.g., Fluffy" />
+        @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+        <mat-error>Name is required</mat-error>
+        } @if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
+        <mat-error>Name must be at least 2 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Species -->
+      <mat-form-field appearance="outline">
+        <mat-label>Species</mat-label>
+        <mat-select formControlName="species">
+          <mat-option value="Dog">Dog</mat-option>
+          <mat-option value="Cat">Cat</mat-option>
+          <mat-option value="Bird">Bird</mat-option>
+          <mat-option value="Rabbit">Rabbit</mat-option>
+          <mat-option value="Hamster">Hamster</mat-option>
+          <mat-option value="Guinea Pig">Guinea Pig</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+        @if (form.get('species')?.hasError('required') && form.get('species')?.touched) {
+        <mat-error>Species is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Birthdate -->
+      <mat-form-field appearance="outline">
+        <mat-label>Birthdate</mat-label>
+        <input matInput type="date" formControlName="birthdate" />
+        @if (form.get('birthdate')?.hasError('required') && form.get('birthdate')?.touched) {
+        <mat-error>Birthdate is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Mode (Public/Private) -->
+      <mat-form-field appearance="outline">
+        <mat-label>Visibility</mat-label>
+        <mat-select formControlName="mode">
+          <mat-option value="Public">Public</mat-option>
+          <mat-option value="Private">Private</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="4" placeholder="Tell us about your pet..."></textarea>
+      </mat-form-field>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        @if (isSubmitting) {
+        <button type="submit" mat-raised-button color="primary" [disabled]="true">
+          <mat-icon class="spinner">hourglass_empty</mat-icon>
+          <span>Adding...</span>
+        </button>
+        } @else {
+        <button type="submit" mat-raised-button color="primary">
+          <mat-icon>add</mat-icon>
+          <span>Add Pet</span>
+        </button>
+        }
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isSubmitting">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

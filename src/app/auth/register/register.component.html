@@ -1,0 +1,30 @@
+<div class="register-shell">
+  <mat-card class="register-card">
+    <h2 class="title">Create an account</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onRegister()">
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" autocomplete="name" />
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" autocomplete="email" />
+        <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" autocomplete="new-password" />
+        <mat-icon matPrefix>lock</mat-icon>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="isSubmitting">Register</button>
+        <button mat-button type="button" routerLink="/login">Back to login</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

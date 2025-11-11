@@ -1,0 +1,29 @@
+<div class="login-shell">
+  <mat-card class="login-card">
+    <h2 class="title">Sign in to Pet Health Tracker</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" autocomplete="email" />
+        <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" autocomplete="current-password" />
+        <mat-icon matPrefix>lock</mat-icon>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="isSubmitting">Login</button>
+        <button mat-stroked-button color="accent" type="button" routerLink="/register"
+          [disabled]="isSubmitting">Register</button>
+      </div>
+
+      <div class="forgot">
+        <button mat-button type="button" routerLink="/forgot-password">Forgot password?</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
