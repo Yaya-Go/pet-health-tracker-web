@@ -51,6 +51,10 @@
 				<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 			</table>
 
+			@if (dataSource.data.length > 0) {
+				<mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+			}
+
 			@if (dataSource.data.length === 0) {
 				<div class="no-data">
 					<p>No public pets found.</p>

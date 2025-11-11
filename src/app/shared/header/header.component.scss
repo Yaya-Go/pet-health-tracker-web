@@ -10,17 +10,12 @@
   z-index: 1000;
   backdrop-filter: blur(10px);
 
-  /* Ensure all header text and buttons use white color for contrast */
-  .app-button,
-  .user,
-  .user-name,
-  .login-text,
-  .app-name,
-  button.mat-button,
-  button.mat-icon-button,
-  .app-button mat-icon,
-  .user mat-icon {
-    color: white;
+  // All text and icons in white for contrast
+  color: white;
+
+  button,
+  mat-icon {
+    color: white !important;
   }
 
   .left {
@@ -29,25 +24,10 @@
     gap: 1rem;
   }
 
-  .app-name {
-    display: inline-block;
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 1;
-    letter-spacing: 0.05rem;
-    color: white;
-    text-decoration: none;
-    padding: 0;
-    margin-top: 0.5rem;
-    text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
-  }
-
-  /* Button that contains the icon + app name */
   .app-button {
     display: inline-flex;
     align-items: center;
-    color: white;
-    text-decoration: none;
+    gap: 0.5rem;
     padding: 0.5rem 1rem;
     background: transparent;
     border: none;
@@ -58,20 +38,34 @@
       background: rgba(255, 255, 255, 0.1);
       transform: translateY(-0.125rem);
     }
+
+    mat-icon {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+      filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.2));
+    }
   }
 
-  /* Use white color for the logo icon with glow effect */
-  .app-button mat-icon {
-    font-size: 2rem;
-    line-height: 1;
-    color: white;
-    height: 2rem;
-    width: 2rem;
-    filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.2));
+  .app-name {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    margin-top: 0.5rem;
   }
 
   .spacer {
     flex: 1 1 auto;
+  }
+
+  .login-button {
+    border-color: white !important;
+
+    mat-icon,
+    .login-text {
+      color: white !important;
+    }
   }
 
   .login-text {
@@ -82,7 +76,6 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    margin-right: 0.5rem;
     padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 2rem;
@@ -95,8 +88,6 @@
 
   .user-name {
     font-weight: 600;
-    margin-right: 0.25rem;
-    color: white;
   }
 
   button {

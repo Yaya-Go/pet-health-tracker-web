@@ -6,10 +6,13 @@ import {
   signal,
   computed,
   effect,
+  viewChild,
+  AfterViewInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { PetsService } from '../../services/pets.service';
@@ -20,13 +23,15 @@ import { calculateAge } from '../../utils/date.utils';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatTableModule, MatProgressSpinnerModule, MatCardModule],
+  imports: [CommonModule, RouterLink, MatTableModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   private petsService = inject(PetsService);
+
+  paginator = viewChild<MatPaginator>(MatPaginator);
 
   displayedColumns: string[] = ['photo', 'name', 'species', 'age'];
 
@@ -50,5 +55,12 @@ export class HomeComponent {
       // mark loading false after first run
       this.isLoading.set(false);
     });
+  }
+
+  ngAfterViewInit() {
+    const paginatorInstance = this.paginator();
+    if (paginatorInstance) {
+      this.dataSource.paginator = paginatorInstance;
+    }
   }
 }

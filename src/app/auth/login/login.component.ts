@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,6 +32,7 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private snack = inject(MatSnackBar);
 
   form = this.fb.group({
@@ -48,7 +49,10 @@ export class LoginComponent {
     try {
       await this.authService.signIn(email, password);
       this.snack.open('Signed in', 'Close', { duration: 2500 });
-      await this.router.navigate(['/']);
+      
+      // Redirect to returnUrl if present, otherwise go to dashboard
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+      await this.router.navigateByUrl(returnUrl);
     } catch (e: any) {
       this.snack.open(e?.message || 'Sign in failed', 'Close', { duration: 4000 });
     } finally {

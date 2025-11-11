@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddPetComponent } from './pages/add-pet/add-pet.component';
 import { PetDetailComponent } from './pages/pet-detail/pet-detail.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'add-pet', component: AddPetComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  { path: 'add-pet', component: AddPetComponent, canActivate: [authGuard] },
   { path: 'pets/:id', component: PetDetailComponent },
 ];

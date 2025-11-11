@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, signal, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal, effect, viewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { PetsService } from '../../services/pets.service';
 import { AuthService } from '../../services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,14 +26,17 @@ import { calculateAge } from '../../utils/date.utils';
     MatIconModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatPaginatorModule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent {
+export class DashboardComponent implements AfterViewInit {
   private petsService = inject(PetsService);
   private auth = inject(AuthService);
+
+  paginator = viewChild<MatPaginator>(MatPaginator);
 
   displayedColumns: string[] = ['photo', 'name', 'species', 'age', 'actions'];
   dataSource = new MatTableDataSource<Pet>([]);
@@ -60,5 +64,12 @@ export class DashboardComponent {
         this.isLoading.set(false);
       });
     });
+  }
+
+  ngAfterViewInit() {
+    const paginatorInstance = this.paginator();
+    if (paginatorInstance) {
+      this.dataSource.paginator = paginatorInstance;
+    }
   }
 }

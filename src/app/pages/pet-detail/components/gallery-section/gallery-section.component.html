@@ -1,0 +1,39 @@
+<mat-card class="gallery-card">
+  <mat-card-header>
+    <mat-card-title>Image Gallery</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (isOwner()) {
+    <div class="upload-control">
+      <input type="file" multiple (change)="onFileSelected($event)" [disabled]="uploading()" aria-label="Upload images" />
+      @if (uploading()) {
+      <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+      }
+    </div>
+    }
+    @if (gallery().length === 0) {
+    <p class="empty">No images uploaded.</p>
+    }
+    @if (gallery().length > 0) {
+    <div class="gallery-grid">
+      @for (img of gallery(); track img.fullPath) {
+      <div class="img-item">
+        <img [src]="img.url" alt="pet image" />
+        @if (isOwner()) {
+        <div class="img-actions">
+          <button mat-icon-button class="action-delete" color="warn" (click)="deleteImage(img)" aria-label="Delete image"
+            title="Delete image">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button class="action-set-photo" color="primary" (click)="setAsPhoto(img)"
+            aria-label="Set as profile photo" title="Set as profile photo">
+            <mat-icon>photo</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    }
+  </mat-card-content>
+</mat-card>
