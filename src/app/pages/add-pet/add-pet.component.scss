@@ -1,13 +1,49 @@
 .add-pet-shell {
-  padding: 1.5rem;
-  max-width: 37.5rem;
+  padding: 2rem;
+  max-width: 40rem;
   margin: 0 auto;
+  animation: fadeIn 0.6s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   mat-card {
-    h2 {
-      margin: 0 0 1.5rem 0;
-      font-size: 1.5rem;
-      font-weight: 500;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.98), rgba(249, 250, 251, 0.95)) !important;
+    border: 0.0625rem solid rgba(102, 126, 234, 0.1) !important;
+
+    mat-card-header {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 1.5rem 0;
+
+      .mat-mdc-card-header-text {
+        margin: 0;
+        width: 100%;
+      }
+    }
+
+    mat-card-title {
+      font-size: 2rem !important;
+      font-weight: 600 !important;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin: 0 !important;
+    }
+
+    mat-card-content {
+      padding: 1.5rem !important;
     }
   }
 }
@@ -15,7 +51,7 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 
   mat-form-field {
     width: 100%;
@@ -28,12 +64,29 @@
 
 .actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   justify-content: flex-end;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 
   button {
-    min-width: 7.5rem;
+    min-width: 8rem;
+    border-radius: 2rem !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 2rem !important;
+
+    &[color="primary"] {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: white !important;
+      box-shadow: 0 0.25rem 1rem rgba(102, 126, 234, 0.4) !important;
+
+      &:hover:not([disabled]) {
+        box-shadow: 0 0.5rem 1.5rem rgba(102, 126, 234, 0.5) !important;
+      }
+
+      mat-icon {
+        color: white !important;
+      }
+    }
   }
 }
 

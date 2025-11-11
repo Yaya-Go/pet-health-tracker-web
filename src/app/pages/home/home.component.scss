@@ -4,34 +4,77 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .header-card {
   margin-bottom: 2rem;
-  background-color: var(--mat-sys-surface-variant);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: pulse 15s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate(-5%, -5%) scale(1.1);
+    }
+  }
 
   .mat-mdc-card-header {
-    padding: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
   }
 
   .mat-mdc-card-title {
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: var(--mat-sys-on-surface);
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: white !important;
     margin: 0;
+    text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
   }
 
   .mat-mdc-card-subtitle {
-    color: var(--mat-sys-on-surface-variant);
+    color: rgba(255, 255, 255, 0.9) !important;
     margin: 0.5rem 0 0 0;
+    font-size: 1.125rem;
   }
 }
 
 .table-card {
   position: relative;
-  background-color: var(--mat-sys-surface);
-  border-radius: var(--mat-sys-container-shape, 0.25rem);
-  box-shadow: var(--mat-sys-shadow-0);
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden;
 
   .mat-mdc-card-content {
     padding: 0;
@@ -44,37 +87,43 @@
   align-items: center;
   height: 25rem;
   color: var(--mat-sys-primary);
+
+  mat-spinner {
+    animation: fadeIn 0.5s ease;
+  }
 }
 
 .pets-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: var(--mat-sys-surface);
+  background-color: transparent;
 
   th[mat-header-cell] {
-    background-color: var(--mat-sys-surface-container);
-    color: var(--mat-sys-on-surface);
-    font-weight: 500;
+    background: linear-gradient(to bottom, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+    color: #667eea;
+    font-weight: 600;
     font-size: 0.875rem;
     text-transform: uppercase;
-    letter-spacing: 0.03125rem;
-    padding: 1rem;
+    letter-spacing: 0.0625rem;
+    padding: 1.25rem 1rem;
     text-align: left;
-    border-bottom: 0.0625rem solid var(--mat-sys-outline);
+    border-bottom: 0.125rem solid rgba(102, 126, 234, 0.2);
   }
 
   td[mat-cell] {
-    padding: 1rem;
-    border-bottom: 0.0625rem solid var(--mat-sys-outline-variant);
+    padding: 1.25rem 1rem;
+    border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.05);
     color: var(--mat-sys-on-surface);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 
   tr[mat-row] {
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
 
     &:hover {
-      background-color: var(--mat-sys-surface-container-low);
+      background: linear-gradient(to right, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.03));
+      transform: scale(1.01);
     }
 
     &:last-child td[mat-cell] {
@@ -86,18 +135,25 @@
 .pet-photo {
   max-width: 5rem;
   max-height: 5rem;
-  border-radius: 0.25rem;
+  border-radius: 0.75rem;
   object-fit: cover;
   display: block;
-  background-color: var(--mat-sys-surface-container);
-  border: 0.0625rem solid var(--mat-sys-outline-variant);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 0.1875rem solid white;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1) rotate(2deg);
+  }
 }
 
 .no-data {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
   color: var(--mat-sys-on-surface-variant);
-  font-size: 1rem;
+  font-size: 1.125rem;
+  opacity: 0.7;
 
   p {
     margin: 0;

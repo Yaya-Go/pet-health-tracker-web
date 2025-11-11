@@ -23,7 +23,7 @@ body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 
@@ -36,4 +36,67 @@ body {
 html,
 body {
   height: 100%;
+}
+
+// Global enhancements for a fancier look
+* {
+  box-sizing: border-box;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Enhanced Material Card styles
+mat-card {
+  border-radius: 1rem !important;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95) !important;
+
+  &:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12) !important;
+  }
+}
+
+// Enhanced buttons
+button[mat-raised-button],
+button[mat-flat-button] {
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03125rem !important;
+  transition: all 0.3s ease !important;
+
+  &:hover:not([disabled]) {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+button[mat-icon-button] {
+  transition: all 0.2s ease !important;
+
+  &:hover:not([disabled]) {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.04) !important;
+  }
+}
+
+// Enhanced form fields
+mat-form-field {
+  .mat-mdc-text-field-wrapper {
+    border-radius: 0.5rem !important;
+  }
+}
+
+// Smooth transitions for all interactive elements
+a,
+button,
+input,
+select,
+textarea {
+  transition: all 0.2s ease;
 }

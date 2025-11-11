@@ -1,8 +1,11 @@
 <div class="add-pet-shell">
   <mat-card>
-    <h2>Add New Pet</h2>
-
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+    <mat-card-header>
+      <mat-card-title>Add New Pet</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
       <!-- Name -->
       <mat-form-field appearance="outline">
         <mat-label>Pet Name</mat-label>
@@ -75,5 +78,6 @@
         </button>
       </div>
     </form>
+    </mat-card-content>
   </mat-card>
 </div>
