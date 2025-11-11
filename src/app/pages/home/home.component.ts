@@ -8,17 +8,19 @@ import {
   effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { PetsService } from '../../services/pets.service';
 import { Pet } from '../../models/pet.model';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { calculateAge } from '../../utils/date.utils';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatProgressSpinnerModule, MatCardModule],
+  imports: [CommonModule, RouterLink, MatTableModule, MatProgressSpinnerModule, MatCardModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,6 +39,9 @@ export class HomeComponent {
   dataSource = new MatTableDataSource<Pet>([]);
   isLoading = signal(true);
 
+  // Use shared helper
+  calculateAge = calculateAge;
+
   constructor() {
     // Keep the MatTableDataSource in sync with the publicPets signal
     effect(() => {
@@ -45,21 +50,5 @@ export class HomeComponent {
       // mark loading false after first run
       this.isLoading.set(false);
     });
-  }
-  /**
-   * Calculate age in years from a birthdate string (ISO format).
-   */
-  calculateAge(birthdate: string): number {
-    const today = new Date();
-    const birth = new Date(birthdate);
-    console.log('Calculating age for birthdate:', birthdate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-
-    return age;
   }
 }

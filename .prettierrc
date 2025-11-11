@@ -1,0 +1,15 @@
+{
+  "printWidth": 120,
+  "singleQuote": true,
+  "plugins": ["prettier-plugin-package"],
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular",
+        "useTabs": true,
+        "tabWidth": 2
+      }
+    }
+  ]
+}

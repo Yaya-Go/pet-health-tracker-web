@@ -3,26 +3,26 @@
     <!-- Logo + title as a single router button -->
     <button mat-button routerLink="/" class="app-button" aria-label="Go to home">
       <mat-icon aria-hidden="false">pets</mat-icon>
-      <span class="app-name">Pet Health Tracker</span>
+      <span class="app-name">Pet Tracker</span>
     </button>
   </div>
 
   <span class="spacer" aria-hidden="true"></span>
   @if (user()) {
-  <div class="user">
-    <button mat-icon-button routerLink="/dashboard" title="Dashboard">
-      <mat-icon>dashboard</mat-icon>
-    </button>
-    <mat-icon aria-hidden="true">person</mat-icon>
-    <span class="user-name">{{ user().displayName || user().email }}</span>
-    <button mat-icon-button color="warn" (click)="onLogout()" title="Logout">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </div>
+    <div class="user">
+      <button mat-icon-button routerLink="/dashboard" title="Dashboard">
+        <mat-icon>dashboard</mat-icon>
+      </button>
+      <mat-icon aria-hidden="true">person</mat-icon>
+      <span class="user-name">{{ user().displayName || user().email }}</span>
+      <button mat-icon-button color="warn" (click)="onLogout()" title="Logout">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
   } @else {
-  <button mat-stroked-button color="accent" (click)="onLogin()" aria-label="Login">
-    <mat-icon aria-hidden="false">login</mat-icon>
-    <span class="login-text">Login</span>
-  </button>
+    <button mat-stroked-button color="accent" (click)="onLogin()" aria-label="Login">
+      <mat-icon aria-hidden="false">login</mat-icon>
+      <span class="login-text">Login</span>
+    </button>
   }
 </mat-toolbar>

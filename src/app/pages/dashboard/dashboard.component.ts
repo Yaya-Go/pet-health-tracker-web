@@ -11,6 +11,7 @@ import { PetsService } from '../../services/pets.service';
 import { AuthService } from '../../services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import type { Pet } from '../../models/pet.model';
+import { calculateAge } from '../../utils/date.utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,6 +39,9 @@ export class DashboardComponent {
   isLoading = signal(true);
   pets = signal<Pet[]>([]);
 
+  // Use shared helper
+  calculateAge = calculateAge;
+
   constructor() {
     // React to auth state changes and update pets signal
     effect(() => {
@@ -56,18 +60,5 @@ export class DashboardComponent {
         this.isLoading.set(false);
       });
     });
-  }
-
-  // Helper to calculate age from birthdate string (same logic as HomeComponent)
-  calculateAge(birthdate?: string): number | null {
-    if (!birthdate) return null;
-    const today = new Date();
-    const birth = new Date(birthdate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-    return age;
   }
 }

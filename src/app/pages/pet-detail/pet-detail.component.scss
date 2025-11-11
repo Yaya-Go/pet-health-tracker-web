@@ -1,0 +1,181 @@
+.pet-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.summary-card .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.description-row {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.12);
+
+  strong {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.pet-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.edit-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pet-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pet-edit-form .full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.flex-sections {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.activities-card,
+.gallery-card {
+  min-height: 20rem;
+}
+
+.activity-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.notes-field {
+  width: 100%;
+}
+
+.activities-table {
+  width: 100%;
+  margin-top: 1rem;
+
+  .edit-field {
+    width: 100%;
+    margin: -0.5rem 0;
+
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      padding: 0;
+    }
+  }
+
+  td button {
+    margin-right: 0.25rem;
+  }
+}
+
+.upload-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 0.75rem;
+}
+
+.img-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  &:hover .img-actions {
+    opacity: 1;
+  }
+}
+
+.img-item img {
+  width: 100%;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+.img-actions {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+
+  button {
+    pointer-events: all;
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.action-delete {
+  align-self: flex-end;
+}
+
+.action-set-photo {
+  align-self: flex-end;
+}
+
+.empty {
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.not-found {
+  text-align: center;
+  padding: 2rem;
+}

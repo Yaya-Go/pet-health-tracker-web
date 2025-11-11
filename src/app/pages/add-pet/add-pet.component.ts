@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { PetsService } from '../../services/pets.service';
 import { AuthService } from '../../services/auth.service';
 import type { Pet } from '../../models/pet.model';
@@ -28,6 +30,8 @@ import type { Pet } from '../../models/pet.model';
     MatSelectModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './add-pet.component.html',
   styleUrls: ['./add-pet.component.scss'],
@@ -43,7 +47,7 @@ export class AddPetComponent {
   form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     species: ['', [Validators.required]],
-    birthdate: ['', [Validators.required]],
+    birthdate: [null as Date | null, [Validators.required]],
     mode: ['Private', [Validators.required]],
     description: [''],
   });
@@ -69,7 +73,7 @@ export class AddPetComponent {
     const pet: Omit<Pet, 'id' | 'createdAt' | 'lastModify'> = {
       name: formValue.name!,
       species: formValue.species!,
-      birthdate: formValue.birthdate!,
+      birthdate: formValue.birthdate!.toISOString().split('T')[0], // Convert Date to YYYY-MM-DD string
       mode: (formValue.mode as 'Public' | 'Private') || 'Private',
       description: formValue.description || undefined,
       userId: user.uid,

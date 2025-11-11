@@ -27,10 +27,12 @@
         </td>
       </ng-container>
 
-      <!-- Name -->
+      <!-- Name (link to detail) -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let pet">{{ pet.name }}</td>
+        <td mat-cell *matCellDef="let pet">
+          <a [routerLink]="['/pets', pet.id]" class="pet-link">{{ pet.name }}</a>
+        </td>
       </ng-container>
 
       <!-- Species -->

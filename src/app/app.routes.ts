@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddPetComponent } from './pages/add-pet/add-pet.component';
+import { PetDetailComponent } from './pages/pet-detail/pet-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,4 +15,5 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'add-pet', component: AddPetComponent },
+  { path: 'pets/:id', component: PetDetailComponent },
 ];
