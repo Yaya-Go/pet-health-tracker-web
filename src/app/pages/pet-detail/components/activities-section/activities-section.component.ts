@@ -10,7 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivitiesService } from '../../../../services/activities.service';
-import { AuthService } from '../../../../services/auth.service';
+import { AddActivityFormComponent } from '../add-activity-form/add-activity-form.component';
 import type { Activity } from '../../../../models/activity.model';
 
 @Component({
@@ -27,6 +27,7 @@ import type { Activity } from '../../../../models/activity.model';
     MatPaginatorModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    AddActivityFormComponent,
   ],
   templateUrl: './activities-section.component.html',
   styleUrls: ['./activities-section.component.scss'],
@@ -34,7 +35,6 @@ import type { Activity } from '../../../../models/activity.model';
 })
 export class ActivitiesSectionComponent implements AfterViewInit {
   private activitiesService = inject(ActivitiesService);
-  private auth = inject(AuthService);
   private fb = inject(FormBuilder);
 
   readonly petId = input.required<string>();
@@ -50,11 +50,6 @@ export class ActivitiesSectionComponent implements AfterViewInit {
   get displayedColumns(): string[] {
     return this.isOwner() ? ['date', 'type', 'notes', 'actions'] : ['date', 'type', 'notes'];
   }
-
-  readonly activityForm = this.fb.group({
-    type: ['', Validators.required],
-    notes: [''],
-  });
 
   constructor() {
     effect(() => {
@@ -106,24 +101,6 @@ export class ActivitiesSectionComponent implements AfterViewInit {
     await this.activitiesService.update(activity.id, updates);
     this.editingActivityId.set(null);
     this.activityEditForms.delete(activity.id);
-  }
-
-  async addActivity() {
-    if (!this.isOwner()) return;
-    const user = this.auth.user();
-    const id = this.petId();
-    if (!user || !id) return;
-    const value = this.activityForm.value;
-    if (!value.type) return;
-    const newAct: Partial<Activity> = {
-      petId: id,
-      type: value.type,
-      notes: value.notes || '',
-      timestamp: new Date().toISOString(),
-      userId: user.uid,
-    } as any;
-    await this.activitiesService.add(newAct);
-    this.activityForm.reset();
   }
 
   async deleteActivity(activity: Activity) {
